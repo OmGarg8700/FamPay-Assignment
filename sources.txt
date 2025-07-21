@@ -1,0 +1,4 @@
+CREATE INDEX idx_published_at_desc ON videos (published_at DESC);
+
+mysql -h 127.0.0.1 -P 3307 -u root -p
+redis-cli
