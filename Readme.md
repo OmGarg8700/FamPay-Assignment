@@ -1,6 +1,6 @@
 # 🚀 YouTube Data Fetcher – Async, Cached & Fault-Tolerant API with Celery
 
-![YouTube Data Pipeline]((https://github.com/OmGarg8700/FamPay-Assignment/blob/main/flow.png))
+![YouTube Data Pipeline](https://github.com/OmGarg8700/FamPay-Assignment/blob/main/flow.png?raw=true)
 
 ## 📌 Overview
 
@@ -87,10 +87,10 @@ Key features include:
 ---
 
 ### 🏗️ Setup and Run
-git clone https://github.com/OmGarg8700/FamPay-Assignment.git
-cd FamPay-Assignment
-cp .env.sample .env
-docker-compose up --build
+- git clone https://github.com/OmGarg8700/FamPay-Assignment.git
+- cd FamPay-Assignment
+- cp .env.sample .env
+- docker-compose up --build
 
 
 ### Edit .env and add your YouTube API keys:
@@ -101,7 +101,7 @@ docker-compose down
 
 
 ## API Testing
-Health Check
+- Health Check
 GET http://localhost:5001/health
 
 ```
@@ -111,7 +111,7 @@ GET http://localhost:5001/health
 }
 ```
 
-Get Videos (Paginated)
+- Get Videos (Paginated)
 GET http://localhost:5001/getData?limit=50&pageNo=1
 Valid limits: 10, 20, 50, 100
 ```
