@@ -5,5 +5,4 @@ Constants = {
     "YOUTUBE_API_URL": "https://www.googleapis.com/youtube/v3/search",
     "REDIS_KEY_INDEX": "youtube_api_key_index",
     "MAX_RESULTS": 50,
-    "LATEST_PUBLISHED_AT": "latest_published_at",  # Default value, can be updated later
 }

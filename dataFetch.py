@@ -19,7 +19,6 @@ SEARCH_QUERY = os.getenv("SEARCH_QUERY", "football")
 REDIS_KEY_INDEX = Constants["REDIS_KEY_INDEX"]
 MAX_RESULTS = Constants["MAX_RESULTS"]
 YOUTUBE_API_URL = Constants["YOUTUBE_API_URL"]
-LATEST_PUBLISHED_AT = Constants["LATEST_PUBLISHED_AT"]
 
 
 def get_api_key():
