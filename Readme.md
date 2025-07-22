@@ -1,6 +1,6 @@
 # 🚀 YouTube Data Fetcher – Async, Cached & Fault-Tolerant API with Celery
 
-![YouTube Data Pipeline](https://raw.githubusercontent.com/your-username/your-repo-name/main/assets/youtube_pipeline.png)
+![YouTube Data Pipeline]((https://github.com/OmGarg8700/FamPay-Assignment/blob/main/flow.png))
 
 ## 📌 Overview
 
@@ -16,7 +16,7 @@ Key features include:
 
 ---
 
-## ⚙️ Architecture
+## Architecture
 
 - **Flask API**: Serves endpoints for video retrieval and health checks.
 - **Celery with Beat**: Periodically fetches new videos from YouTube.
@@ -25,7 +25,7 @@ Key features include:
 
 ---
 
-## 🔄 What This Project Does
+## What This Project Does
 
 1. **Decoupled Layers**: Flow is separated across:
    - `dataFetch.py`: Celery task to fetch YouTube data.
@@ -48,38 +48,38 @@ Key features include:
 
 ---
 
-## ✅ Optimizations
+## Optimizations
 
-### ✅ Fault Tolerance
+### Fault Tolerance
 - `publishedAfter` for the YouTube API is determined from the latest DB timestamp.
 - Even if one or more fetch jobs fail, the next will continue from the correct point.
 
-### ✅ Thundering Herd Prevention
+### Thundering Herd Prevention
 - Instead of updating cache on-demand from multiple concurrent requests:
   - Cache is refreshed centrally by Celery every 10 seconds.
   - This ensures all requests to page 1 hit Redis, not the DB or YouTube API.
 
-### ✅ Caching Strategy
+### Caching Strategy
 - Page 1 results (limit=100) are cached under a Redis key like `youtube_data_page1`.
 - Smaller paginations are sliced directly from this cached list.
 - API key index is also stored in Redis for round-robin usage.
 
-### ✅ Celery Choice Justification
+### Celery Choice Justification
 - A `while True` loop was avoided.
 - Celery with Beat gives reliable scheduling, automatic retries, and log tracking.
 
 ---
 
-## 🚀 Future Optimizations
+## Future Optimizations
 
 - Store `latest_updated_at` in Redis instead of querying DB.
 - Add rate limit and exponential backoff handling.
 
 ---
 
-## 🧪 How to Run and Test
+## How to Run and Test
 
-### ⚒️ Prerequisites
+### Prerequisites
 
 - Docker and Docker Compose installed
 - Ports `5001`, `3307`, and `6379` available
@@ -87,8 +87,49 @@ Key features include:
 ---
 
 ### 🏗️ Setup and Run
+git clone https://github.com/OmGarg8700/FamPay-Assignment.git
+cd FamPay-Assignment
+cp .env.sample .env
+docker-compose up --build
 
-1. Clone the repo:
-   ```bash
-   git clone https://github.com/your-username/your-repo-name.git
-   cd your-repo-name
+
+### Edit .env and add your YouTube API keys:
+YOUTUBE_API_KEYS=your-key-1,your-key-2
+
+### To stop all services:
+docker-compose down
+
+
+## API Testing
+Health Check
+GET http://localhost:5001/health
+
+```
+{
+    "isError": false,
+    "message": "Server is Up and Running"
+}
+```
+
+Get Videos (Paginated)
+GET http://localhost:5001/getData?limit=50&pageNo=1
+Valid limits: 10, 20, 50, 100
+```
+{
+  "isError": "false",
+  "pageNo": 1,
+  "limit": 50,
+  "totalCount": 200,
+  "totalPages": 4,
+  "videos": [
+    {
+      "video_id": "abc123",
+      "title": "Latest Football Match",
+      "description": "Highlights from today's game",
+      "published_at": "2025-07-22T06:44:47Z",
+      "thumbnail_default": "https://...",
+      ...
+    }
+  ]
+}
+```
