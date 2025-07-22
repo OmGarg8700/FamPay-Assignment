@@ -5,7 +5,7 @@ from sqlalchemy import text
 import redis
 from dotenv import load_dotenv
 
-from model import Base  # import the Base and Video model here
+from model import Base
 
 load_dotenv()
 
@@ -26,7 +26,7 @@ try:
         conn.execute(text("SELECT 1"))
     print("MySQL connection successful.")
 except Exception as e:
-    print(f"Error connecting to MySQL: {e}")
+    print(f"[ERROR] connecting to MySQL: {e}")
     engine = None
     SessionLocal = None
 
@@ -40,7 +40,7 @@ try:
     redis_client.ping()
     print("Redis connection successful.")
 except Exception as e:
-    print(f"Error connecting to Redis: {e}")
+    print(f"[ERROR] connecting to Redis: {e}")
     redis_client = None
 
 

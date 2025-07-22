@@ -2,3 +2,21 @@ CREATE INDEX idx_published_at_desc ON videos (published_at DESC);
 
 mysql -h 127.0.0.1 -P 3307 -u root -p
 redis-cli
+
+celery -A celery_config.app worker --loglevel=info
+celery -A celery_config.app beat --loglevel=info
+
+celery -A celery_config.app worker --beat --loglevel=info
+
+
+- How I mantaind fault tolerant behaviour in data Fetching
+- How I prevented thundering herd problem
+- How I used caching 
+- Why I used celery
+- I have used limit with values 100 only
+
+- How I optimized things like storing only index in redis and (take keys from .env file - secured way)
+
+- Further optimizations
+- like we can only store 100 results in redis and serve 1st page from there only - always
+- we can used redis to store the latest_updated_at insetad of calling it from db
