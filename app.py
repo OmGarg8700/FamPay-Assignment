@@ -1,15 +1,9 @@
-import os
 from flask import Flask, jsonify, request
-from dotenv import load_dotenv
 from connection import init_db
 from service import get_videos_paginated
 
-load_dotenv()
-
 app = Flask(__name__)
 init_db()
-
-debug_mode = os.getenv("DEBUG_MODE", "false").lower() == "true"
 
 @app.route('/getData', methods=['GET'])
 def getVideosData():
@@ -35,4 +29,4 @@ def health_check():
 if __name__ == "__main__":
     port = 5000
     print(f"Server running on port {port}")
-    app.run(port=port, debug=debug_mode)
+    app.run(host='0.0.0.0', port=port)

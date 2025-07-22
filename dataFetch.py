@@ -99,7 +99,7 @@ async def fetch_latest_videos(dp):
     return videos
 
 
-# @shared_task(name="dataFetch.fetch_and_store_videos")
+@shared_task(name="dataFetch.fetch_and_store_videos")
 def fetch_and_store_videos():
     try:
         dp = VideoDataProvider()
@@ -130,6 +130,3 @@ def fetch_and_store_videos():
 
     except Exception as e:
         print(f"[ERROR] Exception occurred: {e}")
-
-
-fetch_and_store_videos()

@@ -3,8 +3,8 @@ import dataFetch  # ✅ manually import the file
 
 app = Celery(
     'youtube_data_fetcher',
-    broker='redis://localhost:6379/0',
-    backend='redis://localhost:6379/0'
+    broker='redis://redis:6379/0',
+    backend='redis://redis:6379/0'
 )
 
 app.conf.beat_schedule = {
